@@ -1,12 +1,13 @@
 package main
 
 import (
-	"adventofcode/day15/pathfinding"
 	"bufio"
 	"fmt"
 	"os"
 	"sort"
 	"strings"
+
+	"github.com/mwraw/adventofcode/day15/pathfinding"
 )
 
 const initialHp = 200
