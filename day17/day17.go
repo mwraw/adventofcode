@@ -17,11 +17,7 @@ func main() {
 }
 
 func waterPath(space [][]string, x int, y int, dirY int) {
-	if y+1 == len(space) {
-		return
-	}
-
-	if space[y+1][x] == "|" {
+	if y+1 == len(space) || space[y+1][x] == "|" {
 		return
 	}
 
@@ -36,17 +32,20 @@ func waterPath(space [][]string, x int, y int, dirY int) {
 		return
 	}
 
-	if space[y+1][x] == "#" || (space[y+1][x] == "~" || space[y+1][x] == "|") && dirY == -1 {
+	if space[y+1][x] == "#" || space[y+1][x] == "~" && dirY == -1 {
 		escaped := false
+
 		for dirX := 1; dirX >= -1; dirX -= 2 {
 			for i := 0; i == 0 || space[y][x+dirX*i] == "." || space[y][x+dirX*i] == "~" || space[y][x+dirX*i] == "|"; i++ {
-				if space[y+1][x+dirX*i] != "#" && space[y+1][x+dirX*i] != "~" {
-					space[y][x+dirX*i] = "|"
-					escaped = true
-					waterPath(space, x+dirX*i, y, 1)
-					break
+				if space[y+1][x+dirX*i] == "#" || space[y+1][x+dirX*i] == "~" {
+					space[y][x+dirX*i] = "~"
+					continue
 				}
-				space[y][x+dirX*i] = "~"
+
+				space[y][x+dirX*i] = "|"
+				escaped = true
+				waterPath(space, x+dirX*i, y, 1)
+				break
 			}
 		}
 
@@ -57,6 +56,7 @@ func waterPath(space [][]string, x int, y int, dirY int) {
 				}
 			}
 		}
+
 		if !escaped {
 			waterPath(space, x, y-1, -1)
 		}
