@@ -21,7 +21,6 @@ func RenderData(fileName string, waterX int) ([][]string, int) {
 	minX, minY, maxX, maxY := boundingBox(lines)
 	space := emptySpace(minX, minY, maxX, maxY)
 	addLines(space, lines, minX, minY)
-	fmt.Println(minX, minY)
 	space[0][waterX-minX] = "+"
 	return space, waterX - minX
 }
@@ -53,11 +52,11 @@ func readData(fileName string) []line {
 }
 
 func boundingBox(lines []line) (int, int, int, int) {
-	minX, minY, maxX, maxY := lines[0].x1, lines[0].y1, lines[0].x2, lines[0].y2
+	minX, minY, maxX, maxY := lines[0].x1-1, lines[0].y1-1, lines[0].x2+1, lines[0].y2
 
 	for i := range lines {
-		minX, minY = min(lines[i].x1, minX), min(lines[i].y1, minY)
-		maxX, maxY = max(lines[i].x2, maxX), max(lines[i].y2, maxY)
+		minX, minY = min(lines[i].x1-1, minX), min(lines[i].y1-1, minY)
+		maxX, maxY = max(lines[i].x2+1, maxX), max(lines[i].y2, maxY)
 	}
 
 	return minX, minY, maxX, maxY
@@ -92,7 +91,8 @@ func emptySpace(minX int, minY int, maxX int, maxY int) [][]string {
 	return space
 }
 
-func printSpace(space [][]string) {
+// PrintSpace prints a graphical representation of the space
+func PrintSpace(space [][]string) {
 	for y := range space {
 		fmt.Println(strings.Join(space[y], ""))
 	}
