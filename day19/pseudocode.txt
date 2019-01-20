@@ -1,0 +1,22 @@
+// pseudocode representing assembly, worked out by hand
+// program just adds up factors of $4 in a very inefficient way
+
+if $0 == 0 {
+    $4 = 947
+} else {
+    $4 = 10551347
+    $0 = 0
+}
+
+$1 = 1
+
+while $1 <= $4 {
+    $5 = 1
+    while $5 <= $4 {
+        if $5 * $1 == $4 {
+            $0 += $1
+        }
+        $5 += 1
+    }
+    $1 += 1
+}
