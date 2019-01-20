@@ -29,7 +29,18 @@ func main() {
 	}
 
 	*ipp--
-	fmt.Println(regr)
+	fmt.Println("Part 1:", regr)
+	fmt.Println("Part 2:", addFactors(10551347))
+}
+
+func addFactors(num int) int {
+	total := 0
+	for i := 1; i <= num; i++ {
+		if num%i == 0 {
+			total += i
+		}
+	}
+	return total
 }
 
 func parseFile(fileName string, opCodes []func([]int, int, int) int, opCodesStr []string) (int, []inst) {
