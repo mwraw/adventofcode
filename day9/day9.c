@@ -25,9 +25,9 @@ int main(int argc, char *argv[]) {
 	
 	long *scores = calloc(num_players, sizeof(long));
 	
-    current->marble = 0;
-    current->next = current;
-    current->previous = current;
+	current->marble = 0;
+	current->next = current;
+	current->previous = current;
 	
 	for(long marble = 1; marble<=highest_marble; marble++) {
 		if(marble % 23 == 0) {
@@ -59,17 +59,17 @@ node_t *add_to_list(long marble, node_t *after) {
 	node_t *new_marble = malloc(sizeof(node_t));
 
 	new_marble->marble = marble;
-    new_marble->previous = after;
-    new_marble->next = after->next;
+	new_marble->previous = after;
+	new_marble->next = after->next;
 
-    after->next->previous = new_marble;
-    after->next = new_marble;
+	after->next->previous = new_marble;
+	after->next = new_marble;
 
-    return new_marble;
+	return new_marble;
 }
 
 node_t *move_in_list(node_t *current, int steps, int direction) {
-    for(; steps > 0; steps--)
+	for(; steps > 0; steps--)
 		current = direction == 1 ? current->next : current->previous;
 		
 	return current;
@@ -77,7 +77,7 @@ node_t *move_in_list(node_t *current, int steps, int direction) {
 
 node_t *delete_from_list(node_t *current_marble) {
 	current_marble->previous->next = current_marble->next;
-    current_marble->next->previous = current_marble->previous;
+	current_marble->next->previous = current_marble->previous;
 	
-    return current_marble->next;
+	return current_marble->next;
 }
